@@ -1,0 +1,672 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Granda Comunicação Visual — A comunicação visual das grandes marcas</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700;800;900&family=Poppins:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --navy:#0f1c3f;
+    --navy-2:#1c3468;
+    --navy-3:#233d7f;
+    --pink:#ee0061;
+    --pink-dark:#b8004b;
+    --pink-light:#ffe6f0;
+    --ink:#161c2c;
+    --gray:#5b6274;
+    --gray-light:#8b90a0;
+    --bg-light:#f5f6fa;
+    --line:#e6e8f0;
+    --white:#ffffff;
+  }
+  *{margin:0;padding:0;box-sizing:border-box;}
+  html{scroll-behavior:smooth;}
+  body{font-family:'Poppins',sans-serif;color:var(--ink);line-height:1.6;background:var(--white);overflow-x:hidden;}
+  h1,h2,h3,h4{font-family:'Montserrat',sans-serif;color:var(--navy);}
+  a{text-decoration:none;color:inherit;}
+  ul{list-style:none;}
+  img{max-width:100%;display:block;}
+  .wrap{max-width:1220px;margin:0 auto;padding:0 24px;}
+  .eyebrow{display:inline-flex;align-items:center;gap:10px;font-family:'Montserrat',sans-serif;font-weight:700;font-size:12.5px;letter-spacing:2px;text-transform:uppercase;color:var(--navy-3);margin-bottom:14px;}
+  .eyebrow::before{content:"";width:26px;height:9px;background:var(--pink);display:inline-block;}
+  .eyebrow.on-dark{color:rgba(255,255,255,.8);}
+  .section{padding:88px 0;}
+  .section-light{background:var(--bg-light);}
+  .section-tight{padding:64px 0;}
+  .center{text-align:center;}
+  .center .eyebrow{justify-content:center;}
+  .btn{display:inline-flex;align-items:center;gap:9px;font-family:'Montserrat',sans-serif;font-weight:700;font-size:14.5px;letter-spacing:.3px;padding:16px 30px;border-radius:4px;transition:transform .18s ease, box-shadow .18s ease, background .18s ease;cursor:pointer;border:2px solid transparent;}
+  .btn-primary{background:var(--pink);color:var(--white);}
+  .btn-primary:hover{transform:translateY(-3px);box-shadow:0 14px 28px rgba(238,0,97,.4);}
+  .btn-outline-light{border-color:rgba(255,255,255,.45);color:var(--white);}
+  .btn-outline-light:hover{background:var(--white);color:var(--navy);border-color:var(--white);}
+  .btn-white{background:var(--white);color:var(--pink-dark);}
+  .btn-white:hover{transform:translateY(-3px);box-shadow:0 14px 28px rgba(0,0,0,.2);}
+
+  .reveal{opacity:0;transform:translateY(24px);transition:opacity .6s ease, transform .6s ease;}
+  .reveal.in{opacity:1;transform:translateY(0);}
+
+  .topbar{background:var(--navy);color:rgba(255,255,255,.75);font-size:12.5px;padding:9px 0;}
+  .topbar .wrap{display:flex;justify-content:space-between;align-items:center;}
+  .topbar-left{display:flex;gap:26px;}
+  .topbar-left span{display:inline-flex;align-items:center;gap:7px;}
+  .topbar-left svg{width:13px;height:13px;stroke:var(--pink);flex-shrink:0;}
+  .topbar-social{display:flex;gap:14px;}
+  .topbar-social a{opacity:.8;transition:opacity .15s;}
+  .topbar-social a:hover{opacity:1;color:var(--pink);}
+  .topbar-social svg{width:14px;height:14px;stroke:currentColor;}
+
+  header{position:sticky;top:0;z-index:60;background:rgba(255,255,255,.98);backdrop-filter:blur(8px);border-bottom:1px solid var(--line);}
+  .nav{display:flex;align-items:center;justify-content:space-between;padding:14px 0;max-width:1220px;margin:0 auto;}
+  .brand-logo{height:42px;width:auto;}
+  nav.menu ul{display:flex;gap:34px;align-items:center;}
+  nav.menu a{font-family:'Montserrat',sans-serif;font-weight:600;font-size:14px;color:var(--navy);transition:color .15s;position:relative;}
+  nav.menu a::after{content:"";position:absolute;left:0;bottom:-6px;width:0;height:2px;background:var(--pink);transition:width .2s;}
+  nav.menu a:hover{color:var(--pink);}
+  nav.menu a:hover::after{width:100%;}
+  .nav-cta{display:flex;align-items:center;gap:22px;}
+  .nav-cta .btn{padding:12px 22px;font-size:13px;}
+  .burger{display:none;width:26px;height:20px;position:relative;cursor:pointer;border:none;background:none;}
+  .burger span{position:absolute;left:0;width:100%;height:2px;background:var(--navy);transition:.25s;}
+  .burger span:nth-child(1){top:0;}
+  .burger span:nth-child(2){top:9px;}
+  .burger span:nth-child(3){top:18px;}
+  #menu-toggle{display:none;}
+  #menu-toggle:checked ~ .mobile-panel{max-height:400px;}
+  #menu-toggle:checked ~ .nav .burger span:nth-child(1){transform:translateY(9px) rotate(45deg);}
+  #menu-toggle:checked ~ .nav .burger span:nth-child(2){opacity:0;}
+  #menu-toggle:checked ~ .nav .burger span:nth-child(3){transform:translateY(-9px) rotate(-45deg);}
+  .mobile-panel{max-height:0;overflow:hidden;transition:max-height .3s ease;background:var(--white);border-top:1px solid var(--line);}
+  .mobile-panel ul{display:flex;flex-direction:column;padding:18px 24px;gap:16px;}
+  .mobile-panel a{font-family:'Montserrat',sans-serif;font-weight:600;font-size:15px;color:var(--navy);}
+
+  .hero{position:relative;color:var(--white);overflow:hidden;padding:90px 0 64px;background:linear-gradient(120deg,rgba(9,16,38,.94) 0%,rgba(15,28,63,.90) 45%,rgba(28,52,104,.82) 100%),url('granda-fabrica.jpg') center 30%/cover;}
+  .hero::before{content:"";position:absolute;top:-140px;right:-180px;width:560px;height:560px;background:radial-gradient(circle,rgba(238,0,97,.30) 0%,rgba(238,0,97,0) 70%);}
+  .hero-inner{position:relative;z-index:2;max-width:800px;}
+  .hero-bar{width:64px;height:14px;background:var(--pink);margin-bottom:22px;}
+  .hero-kicker{font-family:'Montserrat',sans-serif;font-weight:700;font-size:13px;letter-spacing:2px;text-transform:uppercase;color:rgba(255,255,255,.75);margin-bottom:16px;}
+  .hero-kicker b{color:var(--white);}
+  .hero h1{font-size:50px;font-weight:800;color:var(--white);line-height:1.14;letter-spacing:-.5px;margin-bottom:20px;}
+  .hero h1 em{font-style:normal;color:var(--pink);}
+  .hero p{font-size:16.5px;color:rgba(255,255,255,.84);max-width:600px;margin-bottom:32px;font-weight:300;}
+  .hero p b{color:var(--white);font-weight:600;}
+  .hero-actions{display:flex;gap:16px;flex-wrap:wrap;margin-bottom:48px;}
+  .hero-stats{position:relative;z-index:2;display:grid;grid-template-columns:repeat(4,auto);gap:44px;border-top:1px solid rgba(255,255,255,.16);padding-top:28px;}
+  .hero-stats b{font-family:'Montserrat',sans-serif;font-size:32px;font-weight:800;color:var(--white);display:block;}
+  .hero-stats span{font-size:11.5px;color:rgba(255,255,255,.6);font-weight:500;letter-spacing:.3px;text-transform:uppercase;}
+
+  .clients-strip{padding:56px 0;background:var(--white);border-bottom:1px solid var(--line);}
+  .clients-head{display:flex;align-items:baseline;justify-content:space-between;flex-wrap:wrap;gap:10px;margin-bottom:26px;}
+  .clients-head h2{font-size:24px;font-weight:800;}
+  .clients-head .eyebrow{margin-bottom:0;}
+  .clients-wall{display:grid;grid-template-columns:repeat(6,1fr);gap:14px;}
+  .logo-tile{background:var(--white);border:1px solid var(--line);border-radius:10px;height:80px;display:flex;align-items:center;justify-content:center;padding:14px 20px;transition:.2s ease;}
+  .logo-tile:hover{border-color:var(--pink);box-shadow:0 10px 24px rgba(15,28,63,.1);transform:translateY(-3px);}
+  .logo-tile img{max-width:100%;max-height:100%;object-fit:contain;filter:grayscale(100%) opacity(.75);transition:.2s ease;}
+  .logo-tile:hover img{filter:none;}
+  .clients-more{color:var(--gray-light);font-size:13px;margin-top:18px;font-weight:500;}
+
+  .section-head{max-width:680px;margin:0 auto 48px;text-align:center;}
+  .section-head h2{font-size:32px;font-weight:800;}
+  .section-head p{color:var(--gray);margin-top:12px;font-size:15px;}
+
+  .guardioes{background:var(--navy);color:var(--white);position:relative;overflow:hidden;}
+  .guardioes::before{content:"";position:absolute;top:-160px;left:-160px;width:480px;height:480px;background:radial-gradient(circle,rgba(238,0,97,.2) 0%,rgba(238,0,97,0) 70%);}
+  .guardioes-head{position:relative;z-index:2;max-width:760px;margin:0 auto 44px;text-align:center;}
+  .guardioes-head h2{color:var(--white);font-size:32px;font-weight:800;line-height:1.3;margin-bottom:12px;}
+  .guardioes-head p{color:rgba(255,255,255,.7);font-size:15.5px;}
+  .chips-grid{display:grid;grid-template-columns:repeat(6,1fr);gap:18px;position:relative;z-index:2;}
+  .chip-card{grid-column:span 2;background:linear-gradient(160deg,rgba(255,255,255,.07),rgba(255,255,255,.02));border:1px solid rgba(255,255,255,.12);border-radius:18px;padding:28px 26px 26px;position:relative;overflow:hidden;transition:transform .25s ease, background .25s ease;}
+  .chip-card.wide{grid-column:span 3;}
+  .chip-card::after{content:"";position:absolute;left:0;bottom:0;width:100%;height:3px;background:var(--pink);transform:scaleX(0);transform-origin:left;transition:transform .3s ease;}
+  .chip-card:hover{background:linear-gradient(160deg,rgba(255,255,255,.12),rgba(255,255,255,.03));transform:translateY(-5px);}
+  .chip-card:hover::after{transform:scaleX(1);}
+  .chip-icon{width:52px;height:52px;border-radius:14px;background:linear-gradient(135deg,var(--pink),var(--pink-dark));display:flex;align-items:center;justify-content:center;flex-shrink:0;margin-bottom:18px;box-shadow:0 10px 22px rgba(238,0,97,.35);}
+  .chip-icon svg{width:24px;height:24px;stroke:var(--white);}
+  .chip-card h4{color:var(--white);font-family:'Montserrat',sans-serif;font-size:15px;font-weight:800;letter-spacing:.6px;text-transform:uppercase;margin-bottom:8px;}
+  .chip-card span{color:rgba(255,255,255,.62);font-size:13.5px;line-height:1.55;display:block;}
+
+  .services-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:22px;}
+  .service-card{position:relative;border-radius:18px;padding:32px 26px 28px;overflow:hidden;transition:transform .25s ease, box-shadow .25s ease;}
+  .service-card:hover{transform:translateY(-8px);box-shadow:0 22px 44px rgba(15,28,63,.16);}
+  .service-card.dark{background:linear-gradient(155deg,var(--navy-3),var(--navy));}
+  .service-card.light{background:var(--bg-light);border:1px solid var(--line);}
+  .service-card .s-num{position:absolute;top:18px;right:22px;font-family:'Montserrat',sans-serif;font-weight:900;font-size:13px;letter-spacing:1px;}
+  .service-card.dark .s-num{color:rgba(255,255,255,.3);}
+  .service-card.light .s-num{color:rgba(15,28,63,.18);}
+  .service-blob{width:66px;height:66px;border-radius:20px;display:flex;align-items:center;justify-content:center;margin-bottom:24px;position:relative;}
+  .service-card.dark .service-blob{background:linear-gradient(135deg,var(--pink),var(--pink-dark));box-shadow:0 14px 28px rgba(238,0,97,.4);}
+  .service-card.light .service-blob{background:linear-gradient(135deg,var(--navy-2),var(--navy-3));box-shadow:0 14px 28px rgba(15,28,63,.22);}
+  .service-blob svg{width:30px;height:30px;stroke:var(--white);}
+  .service-card h3{font-size:19px;font-weight:800;margin-bottom:10px;}
+  .service-card.dark h3{color:var(--white);}
+  .service-card.light h3{color:var(--navy);}
+  .service-card p{font-size:13.5px;line-height:1.6;margin-bottom:18px;}
+  .service-card.dark p{color:rgba(255,255,255,.72);}
+  .service-card.light p{color:var(--gray);}
+  .service-link{font-size:13px;font-weight:700;display:inline-flex;align-items:center;gap:6px;font-family:'Montserrat',sans-serif;transition:gap .2s ease;}
+  .service-card.dark .service-link{color:var(--white);}
+  .service-card.light .service-link{color:var(--navy);}
+  .service-card:hover .service-link{gap:10px;}
+  .service-card.light:hover .service-link{color:var(--pink);}
+
+  .process{background:var(--navy);color:var(--white);position:relative;}
+  .process-grid{display:grid;grid-template-columns:repeat(6,1fr);gap:16px;position:relative;}
+  .process-item{text-align:center;position:relative;background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.1);border-radius:16px;padding:30px 14px 20px;overflow:hidden;transition:transform .25s ease, background .25s ease;}
+  .process-item:hover{background:rgba(255,255,255,.1);transform:translateY(-5px);}
+  .process-item .p-num{position:absolute;top:-14px;right:-2px;font-family:'Montserrat',sans-serif;font-size:64px;font-weight:900;color:rgba(255,255,255,.06);line-height:1;letter-spacing:0;}
+  .process-circle{width:50px;height:50px;border-radius:50%;background:var(--pink);color:var(--white);display:flex;align-items:center;justify-content:center;margin:0 auto 16px;position:relative;z-index:2;box-shadow:0 10px 22px rgba(238,0,97,.3);}
+  .process-circle svg{width:22px;height:22px;stroke:var(--white);}
+  .process-item h4{color:var(--white);font-size:13.5px;font-weight:700;position:relative;z-index:2;letter-spacing:.2px;}
+
+  .portfolio-grid{column-count:4;column-gap:16px;}
+  .portfolio-item{position:relative;border-radius:12px;overflow:hidden;background:var(--navy-2);break-inside:avoid;margin-bottom:16px;display:block;}
+  .portfolio-item img{position:relative;display:block;width:100%;height:auto;transition:transform .4s ease;}
+  .portfolio-item:hover img{transform:scale(1.06);}
+  .portfolio-item::before{content:"";position:absolute;inset:0;background:linear-gradient(180deg,rgba(15,28,63,0) 55%,rgba(6,10,24,.88) 100%);z-index:1;pointer-events:none;}
+  .portfolio-label{position:absolute;left:16px;right:16px;bottom:14px;z-index:2;}
+  .portfolio-label b{display:block;color:var(--white);font-family:'Montserrat',sans-serif;font-weight:800;font-size:15px;}
+  .portfolio-label span{color:rgba(255,255,255,.7);font-size:11.5px;}
+
+  .national{background:var(--bg-light);}
+  .national-grid{display:grid;grid-template-columns:.85fr 1.15fr;gap:56px;align-items:center;}
+  .national-map img{width:100%;border-radius:12px;}
+  .national-hero-stat{display:flex;align-items:center;gap:22px;background:linear-gradient(135deg,var(--navy-3),var(--navy));border-radius:16px;padding:24px 28px;margin:20px 0 26px;box-shadow:0 16px 34px rgba(15,28,63,.18);}
+  .national-hero-stat b{font-family:'Montserrat',sans-serif;font-size:48px;font-weight:900;color:var(--pink);line-height:1;flex-shrink:0;}
+  .national-hero-stat span{color:rgba(255,255,255,.88);font-size:14.5px;font-weight:500;line-height:1.4;}
+  .national-stats{display:grid;grid-template-columns:repeat(4,1fr);gap:12px;}
+  .national-stat{background:var(--white);border-radius:14px;padding:16px 14px 18px;display:flex;flex-direction:column;align-items:flex-start;gap:12px;box-shadow:0 4px 16px rgba(15,28,63,.06);transition:transform .2s ease, box-shadow .2s ease;}
+  .national-stat:hover{transform:translateY(-5px);box-shadow:0 16px 30px rgba(15,28,63,.14);}
+  .national-stat .logo-badge{background:var(--bg-light);border-radius:10px;width:100%;height:52px;display:flex;align-items:center;justify-content:center;padding:8px;}
+  .national-stat .logo-badge img{max-height:100%;max-width:100%;object-fit:contain;}
+  .national-stat b{display:block;font-family:'Montserrat',sans-serif;font-size:28px;font-weight:800;color:var(--navy);line-height:1;}
+  .national-stat span{font-size:11.5px;color:var(--gray);font-weight:600;text-transform:uppercase;letter-spacing:.3px;}
+  .national-copy h2{font-size:30px;font-weight:800;margin-bottom:8px;line-height:1.25;}
+  .national-copy > p{color:var(--gray);font-size:14.5px;margin-bottom:6px;}
+
+  .cta-banner{background:var(--pink);color:var(--white);padding:72px 0;text-align:center;position:relative;overflow:hidden;}
+  .cta-banner::before{content:"";position:absolute;width:600px;height:600px;background:rgba(255,255,255,.08);border-radius:50%;top:-300px;left:-200px;}
+  .cta-banner h2{color:var(--white);font-size:30px;font-weight:800;margin-bottom:14px;position:relative;z-index:2;}
+  .cta-banner p{color:rgba(255,255,255,.92);margin-bottom:28px;font-size:15px;position:relative;z-index:2;}
+  .cta-banner .btn{position:relative;z-index:2;}
+
+  .contact-grid{display:grid;grid-template-columns:.9fr 1.1fr;gap:56px;}
+  .contact-info h2{font-size:28px;font-weight:800;margin-bottom:10px;}
+  .contact-info > p{color:var(--gray);margin-bottom:24px;font-size:14.5px;}
+  .contact-item{display:flex;gap:14px;align-items:flex-start;margin-bottom:18px;}
+  .contact-item .ic{width:42px;height:42px;border-radius:10px;background:var(--pink-light);display:flex;align-items:center;justify-content:center;flex-shrink:0;}
+  .contact-item .ic svg{width:19px;height:19px;stroke:var(--pink-dark);}
+  .contact-item b{display:block;font-size:14px;color:var(--navy);}
+  .contact-item span{font-size:13px;color:var(--gray);}
+  .map-embed{border-radius:14px;overflow:hidden;margin-top:8px;border:1px solid var(--line);}
+  .map-embed iframe{width:100%;height:200px;border:0;display:block;}
+  .form-card{background:var(--bg-light);border-radius:16px;padding:32px;}
+  .form-row{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-bottom:14px;}
+  .form-card input,.form-card textarea{width:100%;padding:13px 15px;border-radius:8px;border:1px solid var(--line);font-family:'Poppins',sans-serif;font-size:14px;background:var(--white);}
+  .form-card textarea{resize:vertical;min-height:90px;margin-bottom:18px;}
+  .form-card label{font-size:12px;font-weight:600;color:var(--navy);margin-bottom:5px;display:block;}
+
+  footer{background:var(--navy);color:rgba(255,255,255,.7);padding:52px 0 22px;}
+  .footer-grid{display:grid;grid-template-columns:1.4fr 1fr 1fr 1fr;gap:36px;margin-bottom:36px;}
+  .footer-logo img{height:36px;margin-bottom:14px;}
+  .footer-grid h4{color:var(--white);font-size:14px;margin-bottom:14px;}
+  .footer-grid li{margin-bottom:9px;font-size:13px;}
+  .footer-grid a:hover{color:var(--pink);}
+  .footer-social{display:flex;gap:10px;margin-top:16px;}
+  .footer-social a{width:34px;height:34px;border-radius:50%;border:1px solid rgba(255,255,255,.2);display:flex;align-items:center;justify-content:center;transition:.2s;}
+  .footer-social a:hover{background:var(--pink);border-color:var(--pink);}
+  .footer-social svg{width:14px;height:14px;stroke:var(--white);}
+  .footer-bottom{border-top:1px solid rgba(255,255,255,.12);padding-top:18px;display:flex;justify-content:space-between;font-size:12px;flex-wrap:wrap;gap:8px;}
+
+  .wa-float{position:fixed;bottom:26px;right:26px;width:58px;height:58px;border-radius:50%;background:#25D366;display:flex;align-items:center;justify-content:center;box-shadow:0 12px 28px rgba(0,0,0,.25);z-index:80;transition:transform .2s;}
+  .wa-float:hover{transform:scale(1.08);}
+  .wa-float svg{width:27px;height:27px;fill:var(--white);}
+
+  @media(max-width:980px){
+    .hero h1{font-size:32px;}
+    .contact-grid,.national-grid{grid-template-columns:1fr;}
+    .hero-stats{grid-template-columns:repeat(2,1fr);gap:20px;}
+    .clients-wall{grid-template-columns:repeat(4,1fr);}
+    .services-grid{grid-template-columns:1fr 1fr;}
+    .chips-grid{grid-template-columns:1fr 1fr;}
+    .chip-card,.chip-card.wide{grid-column:span 1;}
+    .process-grid{grid-template-columns:1fr 1fr 1fr;row-gap:20px;}
+    .portfolio-grid{column-count:3;}
+    .national-stats{grid-template-columns:1fr 1fr;}
+    .national-hero-stat{flex-direction:column;align-items:flex-start;gap:10px;}
+    .footer-grid{grid-template-columns:1fr 1fr;}
+    nav.menu,.topbar-left span:nth-child(2){display:none;}
+    .burger{display:block;}
+  }
+  @media(max-width:600px){
+    .clients-wall{grid-template-columns:repeat(3,1fr);}
+    .services-grid{grid-template-columns:1fr;}
+    .chips-grid{grid-template-columns:1fr;}
+    .process-grid{grid-template-columns:1fr 1fr;}
+    .portfolio-grid{column-count:2;}
+    .footer-grid{grid-template-columns:1fr;}
+    .form-row{grid-template-columns:1fr;}
+  }
+</style>
+</head>
+<body>
+
+<div class="topbar">
+  <div class="wrap">
+    <div class="topbar-left">
+      <span><svg viewBox="0 0 24 24" fill="none" stroke-width="2"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6A19.79 19.79 0 0 1 2.11 4.18 2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.13.96.36 1.9.7 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.9.34 1.85.57 2.81.7A2 2 0 0 1 22 16.92z"/></svg>(42) 3323-9844</span>
+      <span><svg viewBox="0 0 24 24" fill="none" stroke-width="2"><path d="M4 4h16v16H4z"/><path d="m22 6-10 7L2 6"/></svg>contato@granda.ind.br</span>
+    </div>
+    <div class="topbar-social">
+      <a href="https://www.instagram.com/granda_cv/" aria-label="Instagram"><svg viewBox="0 0 24 24" fill="none" stroke-width="2"><rect x="2" y="2" width="20" height="20" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r="1"/></svg></a>
+      <a href="https://www.facebook.com/grandacv/" aria-label="Facebook"><svg viewBox="0 0 24 24" fill="none" stroke-width="2"><path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"/></svg></a>
+      <a href="https://www.linkedin.com/company/granda-nove/" aria-label="LinkedIn"><svg viewBox="0 0 24 24" fill="none" stroke-width="2"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-4 0v7h-4V9h4v1.5A6 6 0 0 1 16 8z"/><rect x="2" y="9" width="4" height="12"/><circle cx="4" cy="4" r="2"/></svg></a>
+    </div>
+  </div>
+</div>
+
+<input type="checkbox" id="menu-toggle">
+<header>
+  <div class="nav wrap">
+    <a href="#"><img src="granda-logo-navy.png" alt="Granda Comunicação Visual" class="brand-logo"></a>
+    <nav class="menu">
+      <ul>
+        <li><a href="#servicos">Serviços</a></li>
+        <li><a href="#portfolio">Cases</a></li>
+        <li><a href="#nacional">Atuação</a></li>
+        <li><a href="#contato">Contato</a></li>
+      </ul>
+    </nav>
+    <div class="nav-cta">
+      <a href="#contato" class="btn btn-primary">Solicitar orçamento</a>
+      <label class="burger" for="menu-toggle"><span></span><span></span><span></span></label>
+    </div>
+  </div>
+  <div class="mobile-panel">
+    <ul>
+      <li><a href="#servicos">Serviços</a></li>
+      <li><a href="#portfolio">Cases</a></li>
+      <li><a href="#nacional">Atuação</a></li>
+      <li><a href="#contato">Contato</a></li>
+    </ul>
+  </div>
+</header>
+
+<section class="hero">
+  <div class="wrap">
+    <div class="hero-inner">
+      <div class="hero-bar"></div>
+      <p class="hero-kicker">Granda Comunicação Visual — <b>25 anos de história</b></p>
+      <h1>A comunicação visual das <em>grandes marcas.</em></h1>
+      <p>Ajudamos grandes marcas a expandir por todo o Brasil com produtos de qualidade, padronização de identidade visual e atendimento em 100% do território nacional. <b>Pense grande. Seja Granda.</b></p>
+      <div class="hero-actions">
+        <a href="#contato" class="btn btn-primary">Solicitar orçamento</a>
+        <a href="#portfolio" class="btn btn-outline-light">Ver cases de sucesso</a>
+      </div>
+    </div>
+    <div class="hero-stats">
+      <div><b class="counter" data-target="25">0</b><span>Anos de mercado</span></div>
+      <div><b class="counter" data-target="100" data-suffix="%">0</b><span>Dos estados brasileiros</span></div>
+      <div><b>5.000 m²</b><span>De fábrica própria</span></div>
+      <div><b class="counter" data-target="40" data-suffix="%">0</b><span>Crescimento médio ao ano</span></div>
+    </div>
+  </div>
+</section>
+
+<section class="clients-strip">
+  <div class="wrap">
+    <div class="clients-head reveal">
+      <div>
+        <span class="eyebrow">Referência nacional</span>
+        <h2>Marcas que confiam na Granda</h2>
+      </div>
+    </div>
+    <div class="clients-wall reveal">
+      <div class="logo-tile"><img src="logo-burgerking.png" alt="Burger King"></div>
+      <div class="logo-tile"><img src="logo-starbucks.png" alt="Starbucks"></div>
+      <div class="logo-tile"><img src="logo-cea.png" alt="C&A"></div>
+      <div class="logo-tile"><img src="logo-riachuelo.png" alt="Riachuelo"></div>
+      <div class="logo-tile"><img src="logo-casasbahia.png" alt="Casas Bahia"></div>
+      <div class="logo-tile"><img src="logo-madero.png" alt="Madero"></div>
+      <div class="logo-tile"><img src="logo-bobs.png" alt="Bob's"></div>
+      <div class="logo-tile"><img src="logo-daf.png" alt="DAF"></div>
+      <div class="logo-tile"><img src="logo-cacaushow.png" alt="Cacau Show"></div>
+      <div class="logo-tile"><img src="logo-sicredi.png" alt="Sicredi"></div>
+      <div class="logo-tile"><img src="logo-coamo.png" alt="Coamo"></div>
+      <div class="logo-tile"><img src="logo-arcelormittal.png" alt="ArcelorMittal"></div>
+      <div class="logo-tile"><img src="logo-unidas.png" alt="Unidas"></div>
+      <div class="logo-tile"><img src="logo-popeyes.png" alt="Popeyes"></div>
+      <div class="logo-tile"><img src="logo-tozetto.png" alt="Tozetto"></div>
+      <div class="logo-tile"><img src="logo-muffato.png" alt="Muffato"></div>
+      <div class="logo-tile"><img src="logo-dunlop.png" alt="Dunlop"></div>
+      <div class="logo-tile"><img src="logo-madeiramadeira.png" alt="Madeira Madeira"></div>
+    </div>
+    <p class="clients-more">+ dezenas de outras grandes marcas em todo o Brasil</p>
+  </div>
+</section>
+
+<section class="section guardioes">
+  <div class="wrap">
+    <div class="guardioes-head reveal">
+      <span class="eyebrow on-dark">Nosso propósito</span>
+      <h2>Mais que comunicação visual: somos guardiões da sua marca.</h2>
+      <p>O que nos torna parceiros de confiança das maiores marcas do Brasil.</p>
+    </div>
+    <div class="chips-grid">
+      <div class="chip-card reveal">
+        <div class="chip-icon"><svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-11V5l-8-3-8 3v6c0 7 8 11 8 11z"/></svg></div>
+        <h4>Segurança</h4>
+        <span>Possuímos equipe própria de engenharia, 100% das NR's atendidas e cadastro junto ao CREA.</span>
+      </div>
+      <div class="chip-card reveal">
+        <div class="chip-icon"><svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m9 12 2 2 4-4"/><path d="M12 3 4 6v6c0 5 3.5 8.5 8 9 4.5-.5 8-4 8-9V6z"/></svg></div>
+        <h4>Qualidade</h4>
+        <span>Nossa produção é 100% própria.</span>
+      </div>
+      <div class="chip-card reveal">
+        <div class="chip-icon"><svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 21h18M5 21V7l7-4 7 4v14M9 21v-6h6v6"/></svg></div>
+        <h4>Solidez</h4>
+        <span>25 anos de mercado, crescimento médio de 40% ao ano nos últimos 5 anos.</span>
+      </div>
+      <div class="chip-card wide reveal">
+        <div class="chip-icon"><svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 10c0 7-9 12-9 12s-9-5-9-12a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg></div>
+        <h4>Capilaridade</h4>
+        <span>Atendemos todos os estados do Brasil.</span>
+      </div>
+      <div class="chip-card wide reveal">
+        <div class="chip-icon"><svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M17 21v-2a4 4 0 0 0-4-4H7a4 4 0 0 0-4 4v2"/><circle cx="10" cy="7" r="4"/><path d="M22 21v-2a4 4 0 0 0-3-3.87"/></svg></div>
+        <h4>Parceria duradoura</h4>
+        <span>Nossos clientes que chegam, ficam.</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="section" id="servicos">
+  <div class="wrap">
+    <div class="section-head reveal">
+      <span class="eyebrow">Soluções especializadas</span>
+      <h2>Nossos serviços</h2>
+    </div>
+    <div class="services-grid">
+      <div class="service-card dark reveal">
+        <span class="s-num">01</span>
+        <div class="service-blob"><svg viewBox="0 0 24 24" fill="none" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M3 21h18M5 21V7l7-4 7 4v14M9 21v-6h6v6M9 9h.01M15 9h.01M9 13h.01M15 13h.01"/></svg></div>
+        <h3>Fachadas</h3>
+        <p>A entrada principal da sua empresa é peça central da sua marca.</p>
+        <a href="https://granda.ind.br/fachadas/" class="service-link">Saiba mais →</a>
+      </div>
+      <div class="service-card light reveal">
+        <span class="s-num">02</span>
+        <div class="service-blob"><svg viewBox="0 0 24 24" fill="none" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="7" y="3" width="10" height="7" rx="1"/><path d="M12 10v11M8 21h8"/><circle cx="12" cy="6.5" r="1.4"/></svg></div>
+        <h3>Totens</h3>
+        <p>Sinalização planejada em cada detalhe, do projeto à instalação.</p>
+        <a href="https://granda.ind.br/totens/" class="service-link">Saiba mais →</a>
+      </div>
+      <div class="service-card dark reveal">
+        <span class="s-num">03</span>
+        <div class="service-blob"><svg viewBox="0 0 24 24" fill="none" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M4 21V11a8 8 0 0 1 16 0v10M4 21h16M4 11h16"/></svg></div>
+        <h3>Pórticos</h3>
+        <p>Dimensionados para visualização perfeita a longas distâncias.</p>
+        <a href="https://granda.ind.br/porticos/" class="service-link">Saiba mais →</a>
+      </div>
+      <div class="service-card light reveal">
+        <span class="s-num">04</span>
+        <div class="service-blob"><svg viewBox="0 0 24 24" fill="none" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M6 4v16M6 4h9a4 4 0 0 1 0 8H6M6 12h10a4 4 0 0 1 0 8H6"/></svg></div>
+        <h3>Letras caixa</h3>
+        <p>Sinalização moderna para aplicações externas ou internas.</p>
+        <a href="https://granda.ind.br/letras-caixa/" class="service-link">Saiba mais →</a>
+      </div>
+      <div class="service-card dark reveal">
+        <span class="s-num">05</span>
+        <div class="service-blob"><svg viewBox="0 0 24 24" fill="none" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="7" height="7" rx="1"/><rect x="14" y="3" width="7" height="7" rx="1"/><rect x="3" y="14" width="7" height="7" rx="1"/><rect x="14" y="14" width="7" height="7" rx="1"/></svg></div>
+        <h3>ACM e Volumetria</h3>
+        <p>Alto padrão de qualidade para revitalização de fachadas e pontos de venda.</p>
+        <a href="https://granda.ind.br/revestimentos-em-acm-e-volumetria/" class="service-link">Saiba mais →</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="section process">
+  <div class="wrap">
+    <div class="section-head reveal">
+      <span class="eyebrow on-dark">Metodologia</span>
+      <h2 style="color:var(--white);">COMO AJUDAMOS SUA MARCA A EXPANDIR NACIONALMENTE</h2>
+    </div>
+    <div class="process-grid">
+      <div class="process-item reveal"><span class="p-num">01</span><div class="process-circle"><svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 20h9M16.5 3.5a2.1 2.1 0 0 1 3 3L7 19l-4 1 1-4z"/></svg></div><h4>Projetos</h4></div>
+      <div class="process-item reveal"><span class="p-num">02</span><div class="process-circle"><svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14.7 6.3a1 1 0 0 0 0 1.4l1.6 1.6a1 1 0 0 0 1.4 0l3.77-3.77a6 6 0 0 1-7.94 7.94l-6.91 6.91a2.12 2.12 0 0 1-3-3l6.91-6.91a6 6 0 0 1 7.94-7.94z"/></svg></div><h4>Protótipos</h4></div>
+      <div class="process-item reveal"><span class="p-num">03</span><div class="process-circle"><svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2 2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"/></svg></div><h4>Fabricação</h4></div>
+      <div class="process-item reveal"><span class="p-num">04</span><div class="process-circle"><svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="1" y="7" width="15" height="10" rx="1"/><path d="M16 10h4l3 3v4h-7z"/><circle cx="5.5" cy="19.5" r="1.5"/><circle cx="18.5" cy="19.5" r="1.5"/></svg></div><h4>Logística</h4></div>
+      <div class="process-item reveal"><span class="p-num">05</span><div class="process-circle"><svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="6" width="20" height="14" rx="2"/><path d="M6 6V4a2 2 0 0 1 2-2h8a2 2 0 0 1 2 2v2"/></svg></div><h4>Instalação</h4></div>
+      <div class="process-item reveal"><span class="p-num">06</span><div class="process-circle"><svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M17 6.1H3M21 12.1H3M15.1 18H3"/></svg></div><h4>Pós-venda</h4></div>
+    </div>
+  </div>
+</section>
+
+<section class="section section-light" id="portfolio">
+  <div class="wrap">
+    <div class="section-head reveal">
+      <span class="eyebrow">Cases de sucesso</span>
+      <h2>Projetos entregues para grandes marcas</h2>
+    </div>
+    <div class="portfolio-grid">
+      <div class="portfolio-item reveal">
+        <img src="projeto-starbucks.jpg" alt="Starbucks">
+        <div class="portfolio-label"><b>Starbucks</b><span>Aeroportos e shoppings</span></div>
+      </div>
+      <div class="portfolio-item reveal">
+        <img src="projeto-burgerking.jpg" alt="Burger King">
+        <div class="portfolio-label"><b>Burger King</b><span>Totem e drive-thru</span></div>
+      </div>
+      <div class="portfolio-item reveal">
+        <img src="projeto-madero.jpg" alt="Madero">
+        <div class="portfolio-label"><b>Madero Steak House</b><span>Fachada e letreiro</span></div>
+      </div>
+      <div class="portfolio-item reveal">
+        <img src="projeto-sicredi.jpg" alt="Sicredi">
+        <div class="portfolio-label"><b>Sicredi</b><span>Agência bancária</span></div>
+      </div>
+      <div class="portfolio-item reveal">
+        <img src="projeto-daf.jpg" alt="DAF">
+        <div class="portfolio-label"><b>DAF</b><span>Concessionária</span></div>
+      </div>
+      <div class="portfolio-item reveal">
+        <img src="projeto-ford.jpg" alt="Ford">
+        <div class="portfolio-label"><b>Ford</b><span>Revestimento em ACM</span></div>
+      </div>
+      <div class="portfolio-item reveal">
+        <img src="projeto-max.jpg" alt="Max Atacadista">
+        <div class="portfolio-label"><b>Max Atacadista</b><span>Grupo Muffato</span></div>
+      </div>
+      <div class="portfolio-item reveal">
+        <img src="projeto-cacaushow.jpg" alt="Cacau Show">
+        <div class="portfolio-label"><b>Cacau Show</b><span>Fachada iluminada</span></div>
+      </div>
+      <div class="portfolio-item reveal">
+        <img src="projeto-riachuelo.jpg" alt="Riachuelo">
+        <div class="portfolio-label"><b>Riachuelo</b><span>Letreiro luminoso</span></div>
+      </div>
+      <div class="portfolio-item reveal">
+        <img src="projeto-cea.jpg" alt="C&A">
+        <div class="portfolio-label"><b>C&A</b><span>Letreiro luminoso</span></div>
+      </div>
+      <div class="portfolio-item reveal">
+        <img src="projeto-casasbahia.jpg" alt="Casas Bahia">
+        <div class="portfolio-label"><b>Casas Bahia</b><span>Fachada</span></div>
+      </div>
+      <div class="portfolio-item reveal">
+        <img src="projeto-madeiramadeira.jpg" alt="Madeira Madeira">
+        <div class="portfolio-label"><b>Madeira Madeira</b><span>Fachada</span></div>
+      </div>
+      <div class="portfolio-item reveal">
+        <img src="projeto-unidas.jpg" alt="Unidas">
+        <div class="portfolio-label"><b>Unidas</b><span>Totem</span></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="section national" id="nacional">
+  <div class="wrap national-grid">
+    <div class="national-map reveal">
+      <img src="granda-mapa-brasil.png" alt="Mapa de atuação da Granda em todo o Brasil">
+    </div>
+    <div class="national-copy reveal">
+      <span class="eyebrow">Atuação nacional</span>
+      <h2>Presença nacional, marca por marca</h2>
+      <div class="national-hero-stat">
+        <b>342+</b>
+        <span>Lojas, restaurantes e concessionárias das maiores marcas do Brasil já receberam projetos da Granda.</span>
+      </div>
+      <div class="national-stats">
+        <div class="national-stat"><div class="logo-badge"><img src="logo-madero.png" alt="Madero"></div><b>128</b><span>Restaurantes</span></div>
+        <div class="national-stat"><div class="logo-badge"><img src="logo-bobs.png" alt="Bob's"></div><b>65</b><span>Restaurantes</span></div>
+        <div class="national-stat"><div class="logo-badge"><img src="logo-cea.png" alt="C&A"></div><b>35</b><span>Lojas</span></div>
+        <div class="national-stat"><div class="logo-badge"><img src="logo-madeiramadeira.png" alt="Madeira Madeira"></div><b>32</b><span>Lojas</span></div>
+        <div class="national-stat"><div class="logo-badge"><img src="logo-daf.png" alt="DAF"></div><b>31</b><span>Concessionárias</span></div>
+        <div class="national-stat"><div class="logo-badge"><img src="logo-starbucks.png" alt="Starbucks"></div><b>20</b><span>Lojas</span></div>
+        <div class="national-stat"><div class="logo-badge"><img src="logo-burgerking.png" alt="Burger King"></div><b>16</b><span>Restaurantes</span></div>
+        <div class="national-stat"><div class="logo-badge"><img src="logo-cacaushow.png" alt="Cacau Show"></div><b>15</b><span>Lojas</span></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="cta-banner reveal">
+  <div class="wrap">
+    <h2>Sua marca está pronta para pensar grande?</h2>
+    <p>Fale com nossa equipe e receba um projeto sob medida para o seu negócio.</p>
+    <a href="#contato" class="btn btn-white">Solicitar orçamento</a>
+  </div>
+</section>
+
+<section class="section" id="contato">
+  <div class="wrap contact-grid">
+    <div class="contact-info reveal">
+      <span class="eyebrow">Contato</span>
+      <h2>Vamos conversar sobre o seu projeto</h2>
+      <p>Envie sua mensagem e retornaremos o mais breve possível.</p>
+
+      <div class="contact-item">
+        <div class="ic"><svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 10c0 7-9 12-9 12s-9-5-9-12a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg></div>
+        <div><b>Endereço</b><span>BR-376, km 501 — Colônia Dona Luiza, Ponta Grossa - PR, 84043-450</span></div>
+      </div>
+      <div class="contact-item">
+        <div class="ic"><svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.127.96.362 1.903.7 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.907.338 1.85.573 2.81.7A2 2 0 0 1 22 16.92z"/></svg></div>
+        <div><b>Telefone</b><span>(42) 3323-9844</span></div>
+      </div>
+      <div class="contact-item">
+        <div class="ic"><svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4h16v16H4z"/><path d="m22 6-10 7L2 6"/></svg></div>
+        <div><b>E-mail</b><span>contato@granda.ind.br</span></div>
+      </div>
+
+      <div class="map-embed">
+        <iframe src="https://maps.google.com/maps?q=Granda&t=m&z=15&output=embed&iwloc=near" loading="lazy" title="Localização da Granda"></iframe>
+      </div>
+    </div>
+
+    <div class="form-card reveal">
+      <div class="form-row">
+        <div><label>Nome *</label><input type="text" placeholder="Seu nome"></div>
+        <div><label>Email *</label><input type="email" placeholder="seu@email.com"></div>
+      </div>
+      <div style="margin-bottom:14px;"><label>Empresa</label><input type="text" placeholder="Sua empresa"></div>
+      <div style="margin-bottom:14px;"><label>Assunto *</label><input type="text" placeholder="Assunto"></div>
+      <label>Mensagem *</label>
+      <textarea placeholder="Conte um pouco sobre o seu projeto..."></textarea>
+      <a href="#" class="btn btn-primary" style="width:100%;justify-content:center;">Enviar mensagem</a>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="wrap">
+    <div class="footer-grid">
+      <div class="footer-logo">
+        <img src="granda-logo-branca.png" alt="Granda Comunicação Visual">
+        <p style="margin-top:6px;font-size:13px;max-width:280px;">Pense grande. Seja Granda.</p>
+        <div class="footer-social">
+          <a href="https://www.instagram.com/granda_cv/" aria-label="Instagram"><svg viewBox="0 0 24 24" fill="none" stroke-width="2"><rect x="2" y="2" width="20" height="20" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r="1"/></svg></a>
+          <a href="https://www.facebook.com/grandacv/" aria-label="Facebook"><svg viewBox="0 0 24 24" fill="none" stroke-width="2"><path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"/></svg></a>
+          <a href="https://www.linkedin.com/company/granda-nove/" aria-label="LinkedIn"><svg viewBox="0 0 24 24" fill="none" stroke-width="2"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-4 0v7h-4V9h4v1.5A6 6 0 0 1 16 8z"/><rect x="2" y="9" width="4" height="12"/><circle cx="4" cy="4" r="2"/></svg></a>
+        </div>
+      </div>
+      <div>
+        <h4>Empresa</h4>
+        <ul>
+          <li><a href="#servicos">Serviços</a></li>
+          <li><a href="#portfolio">Cases de sucesso</a></li>
+          <li><a href="#nacional">Atuação nacional</a></li>
+        </ul>
+      </div>
+      <div>
+        <h4>Serviços</h4>
+        <ul>
+          <li><a href="#servicos">Fachadas</a></li>
+          <li><a href="#servicos">Totens</a></li>
+          <li><a href="#servicos">Pórticos</a></li>
+          <li><a href="#servicos">Letras caixa</a></li>
+        </ul>
+      </div>
+      <div>
+        <h4>Contato</h4>
+        <ul>
+          <li>BR-376, km 501, Ponta Grossa - PR</li>
+          <li>(42) 3323-9844</li>
+          <li>contato@granda.ind.br</li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <span>© 2026 Granda Comunicação Visual.</span>
+      <span>Proposta de redesign — versão para apresentação interna</span>
+    </div>
+  </div>
+</footer>
+
+<a href="https://wa.me/554233239844" class="wa-float" aria-label="WhatsApp" target="_blank">
+  <svg viewBox="0 0 32 32"><path d="M16 3C9 3 3 9 3 16c0 2.5.7 4.9 2 7l-2 6 6.2-2c2 1.1 4.3 1.7 6.8 1.7 7 0 13-6 13-13S23 3 16 3zm0 23.6c-2.2 0-4.3-.6-6.1-1.7l-.4-.3-4.1 1.3 1.3-4-.3-.4C5.4 20 4.7 18 4.7 16c0-6.2 5.1-11.3 11.3-11.3S27.3 9.8 27.3 16 21.9 26.6 16 26.6zm6.2-8.5c-.3-.2-2-1-2.3-1.1-.3-.1-.5-.2-.8.2s-.9 1.1-1.1 1.4c-.2.2-.4.3-.8.1-.3-.2-1.4-.5-2.7-1.7-1-.9-1.7-2-1.9-2.3-.2-.3 0-.5.1-.7.2-.2.3-.4.5-.6.2-.2.2-.4.3-.6.1-.2 0-.5 0-.7-.1-.2-.8-2-1.1-2.7-.3-.7-.6-.6-.8-.6h-.7c-.2 0-.6.1-.9.4-.3.3-1.2 1.1-1.2 2.8s1.2 3.2 1.4 3.5c.2.3 2.4 3.7 5.9 5.1.8.3 1.5.6 2 .7.8.3 1.6.2 2.2.1.7-.1 2-.8 2.3-1.6.3-.8.3-1.4.2-1.6-.1-.1-.3-.2-.6-.4z"/></svg>
+</a>
+
+<script>
+document.addEventListener('DOMContentLoaded', function(){
+  var revealEls = document.querySelectorAll('.reveal');
+  var io = new IntersectionObserver(function(entries){
+    entries.forEach(function(e){
+      if(e.isIntersecting){ e.target.classList.add('in'); io.unobserve(e.target); }
+    });
+  }, {threshold:0.12});
+  revealEls.forEach(function(el){ io.observe(el); });
+
+  var counters = document.querySelectorAll('.counter');
+  var counted = false;
+  var statsSection = document.querySelector('.hero-stats');
+  var cio = new IntersectionObserver(function(entries){
+    entries.forEach(function(e){
+      if(e.isIntersecting && !counted){
+        counted = true;
+        counters.forEach(function(c){
+          var target = parseInt(c.getAttribute('data-target'), 10);
+          var suffix = c.getAttribute('data-suffix') || '';
+          var current = 0;
+          var step = Math.max(1, Math.round(target/40));
+          var timer = setInterval(function(){
+            current += step;
+            if(current >= target){ current = target; clearInterval(timer); }
+            c.textContent = current + suffix;
+          }, 30);
+        });
+      }
+    });
+  }, {threshold:0.3});
+  if(statsSection){ cio.observe(statsSection); }
+});
+</script>
+
+</body>
+</html>
